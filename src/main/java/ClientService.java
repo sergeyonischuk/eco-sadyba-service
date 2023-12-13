@@ -1,7 +1,5 @@
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class ClientService {
 
@@ -24,7 +22,7 @@ public class ClientService {
         clientList.sort(dateComparator);
     }
 
-    public List<Client> getActiveClients(List<Client> clients, List<String> activePhones) {
+    public List<Client> getActiveClients(List<Client> clients, HashSet<String> activePhones) {
         List<Client> result = new ArrayList<>();
         for (int i = 0; i < clients.size(); i++) {
             if (isPhoneActive(clients, activePhones, i)) {
@@ -35,7 +33,7 @@ public class ClientService {
 
     }
 
-    private boolean isPhoneActive(List<Client> clients, List<String> activePhones, int index) {
+    private boolean isPhoneActive(List<Client> clients, HashSet<String> activePhones, int index) {
         if (index >= 0 && index < clients.size()) {
             String clientPhone = clients.get(index).getMobilePhone();
             return activePhones.contains(clientPhone);

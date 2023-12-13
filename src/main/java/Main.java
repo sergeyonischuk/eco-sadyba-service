@@ -1,21 +1,22 @@
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 import java.time.Month;
+import java.util.HashSet;
 import java.util.List;
 
 public class Main {
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        FileUtils.cleanDirectory(new File("src/main/result"));
         ExcelReader reader = new ExcelReader();
-        NotepadReader notepadReader = new NotepadReader();
         ClientService service = new ClientService();
-        List<Client> clientList = reader.getClientsFromExcelFile("src/main/resources/klient.xls");
-        List<String> phones = notepadReader.readLinesFromFile("src/main/resources/unique.txt");
-        List<Client> activeClientList = service.getActiveClients(clientList,phones);
-
-//        service.getClientsByMonth(clientList, Month.APRIL);
-
         PhoneNumberWriter phoneNumberWriter = new PhoneNumberWriter();
+        List<Client> clientList = reader.getClientsFromExcelFile("src/main/resources/clients.xls");
+        HashSet<String> ativePhones = reader.getUniquePhoneNumbersFromSells("src/main/resources/sells.xls");
+        List<Client> activeClientList = service.getActiveClients(clientList, ativePhones);
 
-        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, Month.DECEMBER), Month.DECEMBER, 2023);
+        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, Month.FEBRUARY), Month.FEBRUARY, 2023);
     }
 }
