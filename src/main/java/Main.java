@@ -14,7 +14,7 @@ public class Main {
         ClientService service = new ClientService();
         PhoneNumberWriter phoneNumberWriter = new PhoneNumberWriter();
         List<Client> clientList = reader.getClientsFromExcelFile("src/main/resources/clients.xls");
-        HashSet<String> ativePhones = reader.getUniquePhoneNumbersFromSells("src/main/resources/sells.xls");
+        HashSet<String> ativePhones = reader.getUniquePhoneNumbersFromSells("src/main/resources/sales.xls");
         List<Client> activeClientList = service.getActiveClients(clientList, ativePhones);
 
         phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, Month.FEBRUARY), Month.FEBRUARY, 2023);
