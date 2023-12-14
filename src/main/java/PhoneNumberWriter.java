@@ -10,10 +10,7 @@ import java.util.List;
 
 public class PhoneNumberWriter {
     public void writePhoneNumbersByDay(List<Client> clients, Month targetMonth, int year) {
-        YearMonth yearMonth = YearMonth.of(year, targetMonth);
-        int daysInMonth = yearMonth.lengthOfMonth();
 
-        // Створення директорії, якщо її не існує
         String directoryPath = "src/main/result";
         Path directory = Paths.get(directoryPath);
         try {

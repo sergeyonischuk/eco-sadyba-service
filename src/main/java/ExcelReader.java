@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ExcelReader {
     private final Integer CARD_CODE_COLUMN = 0;
@@ -27,6 +26,7 @@ public class ExcelReader {
              Workbook workbook = new HSSFWorkbook(inputStream)) {
 
             Sheet sheet = workbook.getSheetAt(0);
+            //rowIndex - index of the first row with data
             for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
                 result.add(row.getCell(PHONE_ROW_IN_SELLS_SHEET).getStringCellValue());
@@ -44,7 +44,6 @@ public class ExcelReader {
 
             Sheet sheet = workbook.getSheetAt(0);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            //rowIndex - index of the first row with data
             for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
                 Client client = new Client();

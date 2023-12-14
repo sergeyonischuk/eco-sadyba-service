@@ -25,7 +25,7 @@ public class ClientService {
     public List<Client> getActiveClients(List<Client> clients, HashSet<String> activePhones) {
         List<Client> result = new ArrayList<>();
         for (int i = 0; i < clients.size(); i++) {
-            if (isPhoneActive(clients, activePhones, i)) {
+            if (isPhoneActive(clients.get(i).getMobilePhone(), activePhones)) {
                 result.add(clients.get(i));
             }
         }
@@ -33,11 +33,20 @@ public class ClientService {
 
     }
 
-    private boolean isPhoneActive(List<Client> clients, HashSet<String> activePhones, int index) {
-        if (index >= 0 && index < clients.size()) {
-            String clientPhone = clients.get(index).getMobilePhone();
-            return activePhones.contains(clientPhone);
-        } else return false;
+    private boolean isPhoneActive(String phone, HashSet<String> activePhones) {
+        for(int i = 0; i < activePhones.size(); i++) {
+            if (activePhones.contains(phone)) {
+                return true;
+            }
+        }
+        return false;
     }
+
+//    private boolean isPhoneActive(List<Client> clients, HashSet<String> activePhones, int index) {
+//        if (index >= 0 && index < clients.size()) {
+//            String clientPhone = clients.get(index).getMobilePhone();
+//            return activePhones.contains(clientPhone);
+//        } else return false;
+//    }
 
 }
