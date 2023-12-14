@@ -1,5 +1,8 @@
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 
 public class ClientService {
 
@@ -24,9 +27,9 @@ public class ClientService {
 
     public List<Client> getActiveClients(List<Client> clients, HashSet<String> activePhones) {
         List<Client> result = new ArrayList<>();
-        for (int i = 0; i < clients.size(); i++) {
-            if (isPhoneActive(clients.get(i).getMobilePhone(), activePhones)) {
-                result.add(clients.get(i));
+        for (Client client : clients) {
+            if (isPhoneActive(client.getMobilePhone(), activePhones)) {
+                result.add(client);
             }
         }
         return result;
@@ -34,19 +37,11 @@ public class ClientService {
     }
 
     private boolean isPhoneActive(String phone, HashSet<String> activePhones) {
-        for(int i = 0; i < activePhones.size(); i++) {
+        for (int i = 0; i < activePhones.size(); i++) {
             if (activePhones.contains(phone)) {
                 return true;
             }
         }
         return false;
     }
-
-//    private boolean isPhoneActive(List<Client> clients, HashSet<String> activePhones, int index) {
-//        if (index >= 0 && index < clients.size()) {
-//            String clientPhone = clients.get(index).getMobilePhone();
-//            return activePhones.contains(clientPhone);
-//        } else return false;
-//    }
-
 }

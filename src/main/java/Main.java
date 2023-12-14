@@ -3,7 +3,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
@@ -52,11 +51,11 @@ public class Main extends Application {
 
         ClientService service = new ClientService();
         PhoneNumberWriter phoneNumberWriter = new PhoneNumberWriter();
-        List<Client> clientList = reader.getClientsFromExcelFile("src/main/resources/clients.xls");
-        HashSet<String> ativePhones = reader.getUniquePhoneNumbersFromSells("src/main/resources/sales.xls");
-        List<Client> activeClientList = service.getActiveClients(clientList, ativePhones);
+        List<Client> clientList = reader.getClientsFromExcelFile(AppConfig.CLIENT_SHEET_PATH);
+        HashSet<String> activePhones = reader.getUniquePhoneNumbersFromSells(AppConfig.SALES_SHEET_PATH);
+        List<Client> activeClientList = service.getActiveClients(clientList, activePhones);
 
-        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, value), value, 2023);
+        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, value), value, AppConfig.CURRENT_YEAR);
         System.out.println("Ти подиви, працює!");
     }
 }

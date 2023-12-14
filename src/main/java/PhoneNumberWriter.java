@@ -10,9 +10,8 @@ import java.util.List;
 
 public class PhoneNumberWriter {
     public void writePhoneNumbersByDay(List<Client> clients, Month targetMonth, int year) {
+        Path directory = Paths.get(AppConfig.RESULT_FILES_DIRECTORY);
 
-        String directoryPath = "src/main/result";
-        Path directory = Paths.get(directoryPath);
         try {
             Files.createDirectories(directory);
         } catch (IOException e) {
@@ -20,7 +19,7 @@ public class PhoneNumberWriter {
         }
 
         for (int day = 1; day <= YearMonth.of(year, targetMonth).lengthOfMonth(); day++) {
-            String fileName = directoryPath + "/" + day + ".txt";
+            String fileName = AppConfig.RESULT_FILES_DIRECTORY + "/" + day + ".txt";
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
                 for (Client client : clients) {
                     if (client.getDateOfBirth().getMonth() == targetMonth && client.getDateOfBirth().getDayOfMonth() == day) {
