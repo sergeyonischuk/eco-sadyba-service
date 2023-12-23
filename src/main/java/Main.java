@@ -22,13 +22,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Моя програма");
+        primaryStage.setTitle("Sadyba helper");
 
         ChoiceBox<Month> monthChoiceBox = new ChoiceBox<>();
         monthChoiceBox.getItems().addAll(Month.values());
         monthChoiceBox.setValue(Month.JANUARY);
 
-        Button createFilesButton = new Button("Створити файли");
+        Button createFilesButton = new Button("Хєрак!");
         createFilesButton.setOnAction(e -> createFilesForCurrentMonth(monthChoiceBox.getValue()));
 
         VBox vbox = new VBox(10);
