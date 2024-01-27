@@ -6,23 +6,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 public class SmsSender {
-//    public static void main(String[] args) {
-//        // Дані для аутентифікації
-//        String login = AppConfig.login;
-//        String password = AppConfig.password;
-//        String apiUrl = AppConfig.apiUrl;
-//
-//        // Зчитуємо номери телефонів та повідомлення з файлу або іншого джерела
-//        String[] phoneNumbers = {"380992132410"};
-//        String messageText = "Якщо ти читаєш це смс, то моя програма працює!";
-//
-//        try {
-//            // Викликаємо метод для відправки SMS
-//            sendSms(login, password, apiUrl, phoneNumbers, messageText);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void sendSms(String[] phoneNumbers) {
         // Дані для аутентифікації
@@ -31,7 +14,7 @@ public class SmsSender {
         String apiUrl = AppConfig.apiUrl;
 
         // Зчитуємо номери телефонів та повідомлення з файлу або іншого джерела
-        String messageText = "Якщо ти читаєш це смс, то моя програма працює!";
+        String messageText = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатогих врожаїв! Даруємо знижку 20%, що діє 10 днів 0969473218. Ваша Еко Садиба";
 
         try {
             // Викликаємо метод для відправки SMS
