@@ -1,5 +1,5 @@
 public class AppConfig {
-    public final static Integer CURRENT_YEAR = 2023;
+    public final static Integer CURRENT_YEAR = 2024;
     public final static String CLIENT_SHEET_PATH = "src/main/resources/clients.xls";
     public final static String SALES_SHEET_PATH = "src/main/resources/sales.xls";
     public final static String RESULT_FILES_DIRECTORY = "src/main/result";

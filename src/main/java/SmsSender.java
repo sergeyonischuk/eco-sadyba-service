@@ -6,14 +6,31 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 public class SmsSender {
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+//        // Дані для аутентифікації
+//        String login = AppConfig.login;
+//        String password = AppConfig.password;
+//        String apiUrl = AppConfig.apiUrl;
+//
+//        // Зчитуємо номери телефонів та повідомлення з файлу або іншого джерела
+//        String[] phoneNumbers = {"380992132410"};
+//        String messageText = "Якщо ти читаєш це смс, то моя програма працює!";
+//
+//        try {
+//            // Викликаємо метод для відправки SMS
+//            sendSms(login, password, apiUrl, phoneNumbers, messageText);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void sendSms(String[] phoneNumbers) {
         // Дані для аутентифікації
         String login = AppConfig.login;
         String password = AppConfig.password;
         String apiUrl = AppConfig.apiUrl;
 
         // Зчитуємо номери телефонів та повідомлення з файлу або іншого джерела
-        String[] phoneNumbers = {"380992132410"};
         String messageText = "Якщо ти читаєш це смс, то моя програма працює!";
 
         try {

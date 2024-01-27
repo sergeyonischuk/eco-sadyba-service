@@ -1,11 +1,14 @@
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,5 +61,23 @@ public class ExcelReader {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public void createFilesForCurrentMonth(Month value) {
+        try {
+            FileUtils.cleanDirectory(new File("src/main/result"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ExcelReader reader = new ExcelReader();
+
+        ClientService service = new ClientService();
+        PhoneNumberWriter phoneNumberWriter = new PhoneNumberWriter();
+        List<Client> clientList = reader.getClientsFromExcelFile(AppConfig.CLIENT_SHEET_PATH);
+        HashSet<String> activePhones = reader.getUniquePhoneNumbersFromSells(AppConfig.SALES_SHEET_PATH);
+        List<Client> activeClientList = service.getActiveClients(clientList, activePhones);
+
+        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, value), value, AppConfig.CURRENT_YEAR);
+        System.out.println("Ти подиви, працює!");
     }
 }

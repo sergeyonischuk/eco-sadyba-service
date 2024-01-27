@@ -5,13 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.formula.functions.T;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.Month;
-import java.util.HashSet;
-import java.util.List;
 
 public class Main extends Application {
 
@@ -22,14 +18,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Sadyba helper");
+        ExcelReader excelReader = new ExcelReader();
+        SmsSender smsSender = new SmsSender();
+        TxtReader txtReader = new TxtReader();
+        primaryStage.setTitle("Sadyba helper " + AppConfig.CURRENT_YEAR);
 
         ChoiceBox<Month> monthChoiceBox = new ChoiceBox<>();
         monthChoiceBox.getItems().addAll(Month.values());
         monthChoiceBox.setValue(Month.JANUARY);
 
         Button createFilesButton = new Button("Хєрак!");
-        createFilesButton.setOnAction(e -> createFilesForCurrentMonth(monthChoiceBox.getValue()));
+        createFilesButton.setOnAction(e -> excelReader.createFilesForCurrentMonth(monthChoiceBox.getValue()));
+
+        Button sendTodaySms = new Button("Відправити смс іменинникам");
+        sendTodaySms.setOnAction(e -> smsSender.sendSms(txtReader.getCurrentDayBirthdayPhonesFromFile()));
 
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(10));
@@ -41,21 +43,5 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void createFilesForCurrentMonth(Month value) {
-        try {
-            FileUtils.cleanDirectory(new File("src/main/result"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ExcelReader reader = new ExcelReader();
 
-        ClientService service = new ClientService();
-        PhoneNumberWriter phoneNumberWriter = new PhoneNumberWriter();
-        List<Client> clientList = reader.getClientsFromExcelFile(AppConfig.CLIENT_SHEET_PATH);
-        HashSet<String> activePhones = reader.getUniquePhoneNumbersFromSells(AppConfig.SALES_SHEET_PATH);
-        List<Client> activeClientList = service.getActiveClients(clientList, activePhones);
-
-        phoneNumberWriter.writePhoneNumbersByDay(service.getClientsByMonth(activeClientList, value), value, AppConfig.CURRENT_YEAR);
-        System.out.println("Ти подиви, працює!");
-    }
 }
