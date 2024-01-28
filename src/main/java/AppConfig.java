@@ -1,9 +1,9 @@
 public class AppConfig {
     public final static String CLIENT_SHEET_PATH = "src/main/resources/clients.xls";
     public final static String SALES_SHEET_PATH = "src/main/resources/sales.xls";
-    public final static String RESULT_FILES_DIRECTORY = "src/main/result";
+    public final static String BIRTHDAY_MESSAGE_TEXT = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатих врожаїв! Даруємо знижку 20% протягом 10 днів. Ваша Еко Садиба, 0969473218";
 
-    //letsads API config
+    //letsads.com API config
     public final static String login = "";
     public final static String password = "";
     public final static String apiUrl = "https://api.letsads.com";

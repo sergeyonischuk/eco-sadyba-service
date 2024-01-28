@@ -19,7 +19,7 @@ public class Main extends Application {
         primaryStage.setTitle("Eco Sadyba SMS sender");
 
         Button sendTodaySms = new Button("Відправити смс іменинникам");
-        sendTodaySms.setOnAction(e -> smsSender.sendSms(service.getTodayBirthdayActivePhones(AppConfig.CLIENT_SHEET_PATH, AppConfig.SALES_SHEET_PATH)));
+        sendTodaySms.setOnAction(e -> smsSender.sendBirthdaySms(service.getTodayBirthdayActivePhones(AppConfig.CLIENT_SHEET_PATH, AppConfig.SALES_SHEET_PATH)));
 
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(10));
@@ -29,6 +29,4 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-
 }

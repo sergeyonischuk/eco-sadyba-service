@@ -7,27 +7,26 @@ import org.apache.http.util.EntityUtils;
 
 public class SmsSender {
 
-    public void sendSms(String[] phoneNumbers) {
-        // Дані для аутентифікації
-        String login = AppConfig.login;
-        String password = AppConfig.password;
-        String apiUrl = AppConfig.apiUrl;
-
-        // Зчитуємо номери телефонів та повідомлення з файлу або іншого джерела
-        String messageText = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатих врожаїв! Даруємо знижку 20% протягом 10 днів. Ваша Еко Садиба, 0969473218";
-
+    public void sendBirthdaySms(String[] phoneNumbers) {
         try {
-            // Викликаємо метод для відправки SMS
-            sendSms(login, password, apiUrl, phoneNumbers, messageText);
+            sendSms(phoneNumbers, AppConfig.BIRTHDAY_MESSAGE_TEXT);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void sendSms(String login, String password, String apiUrl, String[] phoneNumbers, String messageText) throws Exception {
+    public void sendCustomSms(String[] phoneNumbers, String message) {
+        try {
+            sendSms(phoneNumbers, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void sendSms(String[] phoneNumbers, String messageText) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();
-        HttpPost post = new HttpPost(apiUrl);
-        String xmlBody = buildXmlRequest(login, password, phoneNumbers, messageText);
+        HttpPost post = new HttpPost(AppConfig.apiUrl);
+        String xmlBody = buildXmlRequest(phoneNumbers, messageText);
         post.setHeader("Content-Type", "application/xml");
         post.setEntity(new StringEntity(xmlBody, "UTF-8"));
         HttpResponse response = client.execute(post);
@@ -41,14 +40,13 @@ public class SmsSender {
         EntityUtils.consume(response.getEntity());
     }
 
-    private static String buildXmlRequest(String login, String password, String[] phoneNumbers, String messageText) {
-        // Формуємо XML-запит
+    private static String buildXmlRequest(String[] phoneNumbers, String messageText) {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xmlBuilder.append("<request>");
         xmlBuilder.append("<auth>");
-        xmlBuilder.append("<login>").append(login).append("</login>");
-        xmlBuilder.append("<password>").append(password).append("</password>");
+        xmlBuilder.append("<login>").append(AppConfig.login).append("</login>");
+        xmlBuilder.append("<password>").append(AppConfig.password).append("</password>");
         xmlBuilder.append("</auth>");
         xmlBuilder.append("<message>");
         xmlBuilder.append("<from>ECO-SADYBA</from>");

@@ -48,11 +48,15 @@ public class ClientService {
         String validPhone = null;
 
         if (isPhoneValid(homePhone)) {
-            validPhone = "38" + homePhone;
+            validPhone = homePhone;
         } else if (isPhoneValid(mobilePhone)) {
-            validPhone = "38" + mobilePhone;
+            validPhone = mobilePhone;
         } else if (isPhoneValid(workPhone)) {
-            validPhone = "38" + workPhone;
+            validPhone = workPhone;
+        }
+
+        if (validPhone != null) {
+            validPhone = "38" + validPhone;
         }
 
         return validPhone;
@@ -79,7 +83,6 @@ public class ClientService {
     }
 
     private boolean isPhoneValid(String phoneNumber) {
-        // Regular expression to match a valid Ukrainian phone number
         String regex = "^0(50|63|66|67|68|73|91|92|93|94|95|96|97|98|99)\\d{7}$";
 
         return phoneNumber != null && phoneNumber.matches(regex);
