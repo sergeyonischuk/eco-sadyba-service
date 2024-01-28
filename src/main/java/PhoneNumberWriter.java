@@ -36,7 +36,7 @@ public class PhoneNumberWriter {
         }
     }
 
-    private String getValidPhoneNumber(Client client) {
+    public String getValidPhoneNumber(Client client) {
         String homePhone = client.getHomePhone();
         String mobilePhone = client.getMobilePhone();
         String workPhone = client.getWorkPhone();
@@ -44,11 +44,11 @@ public class PhoneNumberWriter {
         String validPhone = null;
 
         if (isValidPhoneNumber(homePhone)) {
-            validPhone = homePhone;
+            validPhone = "38" + homePhone;
         } else if (isValidPhoneNumber(mobilePhone)) {
-            validPhone = mobilePhone;
+            validPhone = "38" + mobilePhone;
         } else if (isValidPhoneNumber(workPhone)) {
-            validPhone = workPhone;
+            validPhone = "38" + workPhone;
         }
 
         return validPhone;
@@ -56,7 +56,7 @@ public class PhoneNumberWriter {
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         // Regular expression to match a valid Ukrainian phone number
-        String regex = "^(\\+38|0)(50|63|66|67|68|73|91|92|93|94|95|96|97|98|99)\\d{7}$";
+        String regex = "^0(50|63|66|67|68|73|91|92|93|94|95|96|97|98|99)\\d{7}$";
 
         return phoneNumber != null && phoneNumber.matches(regex);
     }
