@@ -40,6 +40,17 @@ public class ClientService {
         return result.toArray(new String[0]);
     }
 
+    public List<Client> getActiveClients(List<Client> clients, HashSet<String> activePhones) {
+        List<Client> result = new ArrayList<>();
+        for (Client client : clients) {
+            if (isPhoneActive(client.getMobilePhone(), activePhones)) {
+                result.add(client);
+            }
+        }
+        return result;
+
+    }
+
     private String getValidPhoneNumber(Client client) {
         String homePhone = client.getHomePhone();
         String mobilePhone = client.getMobilePhone();
@@ -60,17 +71,6 @@ public class ClientService {
         }
 
         return validPhone;
-    }
-
-    public List<Client> getActiveClients(List<Client> clients, HashSet<String> activePhones) {
-        List<Client> result = new ArrayList<>();
-        for (Client client : clients) {
-            if (isPhoneActive(client.getMobilePhone(), activePhones)) {
-                result.add(client);
-            }
-        }
-        return result;
-
     }
 
     private boolean isPhoneActive(String phone, HashSet<String> activePhones) {
