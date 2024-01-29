@@ -4,8 +4,8 @@ public class AppConfig {
     public final static String BIRTHDAY_MESSAGE_TEXT = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатих врожаїв! Даруємо знижку 20% протягом 10 днів. Ваша Еко Садиба, 0969473218";
 
     //letsads.com API config
-    public final static String login = "380992132410";
-    public final static String password = "24041974";
+    public final static String login = "";
+    public final static String password = "";
     public final static String apiUrl = "https://api.letsads.com";
 
     //clients.xls config
