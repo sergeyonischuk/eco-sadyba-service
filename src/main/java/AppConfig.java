@@ -1,6 +1,6 @@
 public class AppConfig {
-    public final static String CLIENT_SHEET_PATH = "src/main/resources/clients.xls";
-    public final static String SALES_SHEET_PATH = "src/main/resources/sales.xls";
+    public final static String CLIENT_SHEET_PATH = "C:\\Users\\Сергей\\IdeaProjects\\zrada\\src\\main\\resources\\clients.xls";
+    public final static String SALES_SHEET_PATH = "C:\\Users\\Сергей\\IdeaProjects\\zrada\\src\\main\\resources\\sales.xls";
     public final static String BIRTHDAY_MESSAGE_TEXT = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатих врожаїв! Даруємо знижку 20% протягом 10 днів. Ваша Еко Садиба, 0969473218";
 
     //letsads.com API config

@@ -9,24 +9,16 @@ public class SmsSender {
 
     public void sendBirthdaySms(String[] phoneNumbers) {
         try {
-            sendSms(phoneNumbers, AppConfig.BIRTHDAY_MESSAGE_TEXT);
+            sendSms(phoneNumbers);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void sendCustomSms(String[] phoneNumbers, String message) {
-        try {
-            sendSms(phoneNumbers, message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void sendSms(String[] phoneNumbers, String messageText) throws Exception {
+    private static void sendSms(String[] phoneNumbers) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(AppConfig.apiUrl);
-        String xmlBody = buildXmlRequest(phoneNumbers, messageText);
+        String xmlBody = buildXmlRequest(phoneNumbers);
         post.setHeader("Content-Type", "application/xml");
         post.setEntity(new StringEntity(xmlBody, "UTF-8"));
         HttpResponse response = client.execute(post);
@@ -40,7 +32,7 @@ public class SmsSender {
         EntityUtils.consume(response.getEntity());
     }
 
-    private static String buildXmlRequest(String[] phoneNumbers, String messageText) {
+    private static String buildXmlRequest(String[] phoneNumbers) {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         xmlBuilder.append("<request>");
@@ -50,7 +42,7 @@ public class SmsSender {
         xmlBuilder.append("</auth>");
         xmlBuilder.append("<message>");
         xmlBuilder.append("<from>ECO-SADYBA</from>");
-        xmlBuilder.append("<text>").append(messageText).append("</text>");
+        xmlBuilder.append("<text>").append(AppConfig.BIRTHDAY_MESSAGE_TEXT).append("</text>");
         for (String phoneNumber : phoneNumbers) {
             xmlBuilder.append("<recipient>").append(phoneNumber).append("</recipient>");
         }
