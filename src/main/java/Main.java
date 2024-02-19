@@ -4,5 +4,6 @@ public class Main {
         ClientService service = new ClientService();
         SmsSender smsSender = new SmsSender();
         smsSender.sendBirthdaySms(service.getTodayBirthdayActivePhones(AppConfig.CLIENT_SHEET_PATH, AppConfig.SALES_SHEET_PATH));
+
     }
 }

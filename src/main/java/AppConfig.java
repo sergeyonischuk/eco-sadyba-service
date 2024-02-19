@@ -7,6 +7,7 @@ public class AppConfig {
     public final static String login = "";
     public final static String password = "";
     public final static String apiUrl = "https://api.letsads.com";
+    public final static Integer COUNT_OF_PHONES_IN_ONE_PACKAGE = 50;
 
     //clients.xls config
     public final static Integer CARD_CODE_COLUMN = 0;

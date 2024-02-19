@@ -1,4 +1,3 @@
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,6 +13,24 @@ public class ClientService {
         List<Client> todayBirthdayClients = getClientsByDay(activeClientList, LocalDate.now());
         return getClientsPhoneNumbers(todayBirthdayClients);
     }
+
+
+
+    public List<String[]> splitArray(String[] inputArray) {
+        List<String[]> result = new ArrayList<>();
+        int startIndex = 0;
+        int endIndex = 0;
+        while (startIndex < inputArray.length) {
+            endIndex = Math.min(startIndex + AppConfig.COUNT_OF_PHONES_IN_ONE_PACKAGE, inputArray.length);
+            String[] subArray = new String[endIndex - startIndex];
+            System.arraycopy(inputArray, startIndex, subArray, 0, endIndex - startIndex);
+            result.add(subArray);
+            startIndex = endIndex;
+        }
+        return result;
+    }
+
+
 
     public List<Client> getClientsByDay(List<Client> clients, LocalDate date) {
         List<Client> result = new ArrayList<>();

@@ -5,14 +5,21 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import java.util.List;
+
 public class SmsSender {
 
     public void sendBirthdaySms(String[] phoneNumbers) {
-        try {
-            sendSms(phoneNumbers);
-        } catch (Exception e) {
-            e.printStackTrace();
+        ClientService service = new ClientService();
+        List<String[]> splited = service.splitArray(phoneNumbers);
+        for (String[] pack : splited) {
+            try {
+                sendSms(pack);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     private static void sendSms(String[] phoneNumbers) throws Exception {
@@ -48,7 +55,6 @@ public class SmsSender {
         }
         xmlBuilder.append("</message>");
         xmlBuilder.append("</request>");
-
         return xmlBuilder.toString();
     }
 }
