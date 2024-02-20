@@ -4,8 +4,8 @@ public class AppConfig {
     public final static String BIRTHDAY_MESSAGE_TEXT = "Вітаємо з днем народження! Бажаємо Вам миру, любові, багатих врожаїв! Даруємо знижку 20% протягом 10 днів. Ваша Еко Садиба, 0969473218";
 
     //letsads.com API config
-    public final static String login = "";
-    public final static String password = "";
+    public static String login = "";
+    public static String password = "";
     public final static String apiUrl = "https://api.letsads.com";
     public final static Integer COUNT_OF_PHONES_IN_ONE_PACKAGE = 50;
 
